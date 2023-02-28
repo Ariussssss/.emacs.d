@@ -128,11 +128,30 @@
   :ensure t
   :config (setq url-automatic-caching nil) 
   (which-key-add-key-based-replacements "C-x y" "有道翻译") 
-  :bind (("C-x y t" . 'youdao-dictionary-search-at-point+) 
+  :bind (
+	 ;; ("C-x y t" . 'youdao-dictionary-search-at-point+) 
          ("C-x y p" . 'youdao-dictionary-play-voice-at-point)
 	 ("C-x y g" . 'youdao-dictionary-search-at-point-posframe) 
          ("C-x y r" . 'youdao-dictionary-search-and-replace) 
          ("C-x y i" . 'youdao-dictionary-search-from-input)))
+
+(use-package fanyi
+  :ensure t
+  :custom
+  (fanyi-providers '(;; 海词
+                     ;; fanyi-haici-provider
+                     ;; Longman
+                     fanyi-longman-provider
+		     ;; Etymonline
+                     fanyi-etymon-provider
+                     ;; 有道同义词词典
+                     ;; fanyi-youdao-thesaurus-provider
+                     ))
+  
+  :bind (
+	 ("C-x y t" . 'fanyi-dwim2) 
+	 )
+)
 
 ;; 更改窗格布局
 (use-package rotate
