@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: matrix
+# key: mx
+# --
+\begin{bmatrix}$0\end{bmatrix}

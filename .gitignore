@@ -1,0 +1,14 @@
+.DS_Store
+
+# Emacs
+*~
+\#*\#
+.\#*
+.ignore
+
+etc/config/init-private.el
+
+eln-cache
+var/*
+var/.lsp-sesson-v1
+!banner

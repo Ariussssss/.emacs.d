@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: margin-center
+# key: mc
+# --
+
+position: absolute;
+`(indent-for-tab-command)`top: 0;
+`(indent-for-tab-command)`bottom: 0;
+`(indent-for-tab-command)`left: 0;
+`(indent-for-tab-command)`right: 0;
+`(indent-for-tab-command)`margin: auto;

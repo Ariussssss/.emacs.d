@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: react-ts-functional
+# key: ts-func
+# expand-env: ((current-file-name (s-upper-camel-case (s-replace ".tsx" "" (file-name-nondirectory (buffer-file-name))))))
+# --
+interface `current-file-name`Props {}
+
+export const `current-file-name` = ({}: `current-file-name`Props) => {
+};
+

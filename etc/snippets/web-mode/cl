@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: cl
+# key: cl
+# --
+
+console.info("${1:$(yas-text)}", $1);
+$0

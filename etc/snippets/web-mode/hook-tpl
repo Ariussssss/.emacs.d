@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: hook-tpl
+# key: ts-hook
+# expand-env: ((current-file-name (s-lower-camel-case (s-replace ".ts" "" (file-name-nondirectory (buffer-file-name))))))
+# --
+import { useState, useEffect, useCallback } from 'react';
+
+export const `current-file-name` = () => {
+};

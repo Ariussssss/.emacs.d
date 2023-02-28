@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: require
+# key: r
+# --
+
+const $1 = require("${1:$(yas-text)}");
+$0

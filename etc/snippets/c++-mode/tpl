@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: cpp tpl
+# key: tpl
+# --
+#include <iostream>
+
+int main() {
+  std::cout << "Hello";
+}

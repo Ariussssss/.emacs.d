@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: else
+# key: else
+# --
+else {
+  $1
+}$0

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: cout variable
+# key: cvar
+# --
+
+cout << "${1:var} = " << $1 << endl;$0

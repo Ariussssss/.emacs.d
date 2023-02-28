@@ -1,0 +1,106 @@
+#+STARTUP:    align fold hidestars oddeven indent 
+#+TITLE: Emacs Howdoyou - A package to search and read stackoverflow and its sisters' sites
+
+[[http://spacemacs.org][file:https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg]]
+
+[[file:screenshots/howdoyou.png]]
+
+* Intro
+This package is inspired by howdoi python and howdoi Emacs packages. it searches
+your query all across stackoverflow and it's sisters' sites. They are:
+- stackoverflow.com
+- stackexchange.com 
+- superuser.com
+- serverfault.com
+- askubuntu.com
+
+The result is then showed in an ~org-mode~ buffer. For each result, question and
+three answers were showed, but they are collapsed by default except the first
+answer. As this package uses Google to get the links, for each query there will
+be a dozen of links, the fist link will be used, then users can go to next
+link and previous link. The author believes that when searching for solutions it
+is important for users to read both questions and answers, so no "quick look"
+features such as code only view or code completion are provided.
+* Install
+MELPA
+
+[[https://melpa.org/#/howdoyou][file:https://melpa.org/packages/howdoyou-badge.svg]]
+
+Spacemacs layer:
+
+https://github.com/thanhvg/spacemacs-eos
+
+* Dependencies
+~promise~ and ~request~ are required.
+User must have ~org-mode~ 9.2 or later installed also.
+
+* Commands
+- ~howdoyou-query:~                 prompt for query and do search
+- ~howdoyou-next-link:~             go to next link
+- ~howdoyou-previous-link:~         go to previous link
+- ~howdoyou-go-back-to-first-link:~ go back to first link
+- ~howdoyou-reload-link:~           reload link
+* Customization
+- ~howdoyou-use-curl:~ default is true if ~curl~ is available
+- ~howdoyou-number-of-answers:~ maximal number of answers to show, default is 3
+- ~howdoyou-switch-to-answer-buffer~: switch to answer buffer if non nil, default is nil
+* Use with helm-google-suggest
+add this snippet to you config file
+#+begin_src elisp
+  (with-eval-after-load "helm-net"
+    (push (cons "How Do You"  (lambda (candidate) (howdoyou-query candidate)))
+          helm-google-suggest-actions))
+#+end_src
+Now =helm-google-suggest= will pass suggestion to howdoyou-query as default
+action.
+
+Note that =spacemas-eos= has its own faster google suggetion engine provided by
+[[https://github.com/thanhvg/emacs-google-suggest][google-suggest]] package.
+
+* Use with counsel-web-suggest
+Requires installed and configured 3rd party package [[https://github.com/mnewt/counsel-web][counsel-web]].
+
+add this function definition to your config file
+#+begin_src elisp
+  (defun my/howdoyou-with-suggestions ()
+    "Call `howdoyou-query' with suggestions from `counsel-web-suggest'."
+    (interactive)
+    (counsel-web-suggest nil
+                        "How Do You: "
+                        #'counsel-web-suggest--google
+                        (lambda (x)
+                          (howdoyou-query x))))
+#+end_src
+Now when calling =my/howdoyou-with-suggestion= (either from ~M-x~ or by [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Changing-Key-Bindings.html][key binding]] of your choice)
+it will pass =counsel-web-suggest= suggestions to howdoyou-query.
+
+* Demo
+
+[[file:screenshots/howdoyou.gif]]
+
+
+[[file:screenshots/howdoyou2.gif]]
+
+* Test
+** generate google html files
+#+begin_src sh
+cd test
+bash curl.sh
+#+end_src
+new google html files are created to run test aganst them.
+** run test
+at project root
+#+begin_src sh
+cask exec ert-runner
+#+end_src
+* Contributors (in no particular order):
+[[https://github.com/dvzubarev][dvzubarev]], [[https://github.com/leothelocust][leothelocust]], [[https://github.com/dickmao][dickmao]], [[https://github.com/AloisJanicek][Alois Janíček]], [[https://github.com/EvanMeek][Evan]] 
+
+* Shoutout
+- https://github.com/chuntaro/emacs-promise
+- https://github.com/tkf/emacs-request
+
+* References
+- https://github.com/gleitz/howdoi
+- https://github.com/lockie/emacs-howdoi
+- https://github.com/atykhonov/emacs-howdoi

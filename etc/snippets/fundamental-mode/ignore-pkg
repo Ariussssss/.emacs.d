@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: ignore-pkg
+# key: ignore-pkg
+# --
+
+# Default ignore pkgs
+tools
+test
+deps
+__tests__
+*.md
+*.json
+*.lock

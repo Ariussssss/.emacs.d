@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: late-math-frac
+# key: /
+# --
+
+\frac{$1}{$0}

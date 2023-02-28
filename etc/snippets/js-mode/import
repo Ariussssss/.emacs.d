@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: import
+# key: import
+# --
+
+import $1 from "$2/${1:$(yas-text)}";
+$0

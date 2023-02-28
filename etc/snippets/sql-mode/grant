@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: grant
+# key: grant
+# --
+
+GRANT ALL PRIVILEGES, SELECT, INSERT, DELETE  ON base.* TO 'user'@'localhost';

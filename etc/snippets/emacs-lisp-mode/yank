@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: yank
+# key: yank
+# --
+
+[[${1:`(current-kill 0)`}][$0]]

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: inline-code
+# key: c
+# --
+
+~${1:`(yank)`}~ $0

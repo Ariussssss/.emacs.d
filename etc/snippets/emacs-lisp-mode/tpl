@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: tpl 
+# key: tpl
+# --
+
+;;; Package --- `(s-replace ".el" "" (file-name-nondirectory (buffer-file-name)))` :
+
+;;; Commentary:
+
+;;; Code:
+$3
+
+(provide '`(s-replace ".el" "" (file-name-nondirectory (buffer-file-name)))`)
+;;; `(concat (file-name-nondirectory (buffer-file-name)))` ends here
+

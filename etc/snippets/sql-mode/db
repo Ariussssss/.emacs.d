@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: db
+# key: db
+# --
+
+CREATE DATABASE IF NOT EXISTS $0 DEFAULT CHARSET utf8 COLLATE utf8_general_ci;

@@ -1,0 +1,296 @@
+#+STARTUP:    align fold hidestars oddeven indent 
+#+SEQ_TODO:   TODO(t) INPROGRESS(i) | DONE(d) CANCELED(c)
+* DONE parse SO link
+* DONE use async await lib
+https://nullprogram.com/blog/2019/03/10/
+this one is hard
+use promise.el instead
+* DONE pretty print the dom 
+travese the dom tree and print the code part in side done
+
+org template and find the code type to highlight
+each will have tag use the tag 
+
+* DONE next and previous link
+local buffer var
+no, just a global state is ok 
+because you will have a singleton *How Dou You* buffer
+* DONE insert link also
+done
+#+begin_example
+
+#+end_example
+* DONE parse link and retain img
+query ubuntu disk partition
+
+done but not good
+now the lines are long and double white spaces
+
+how about modify the dom directly
+* DONE dom is just a tree 
+walk this dom and if it's an a tag, replace it* dom is just a tree 
+
+(pre nil (code nil int x; x = 10;))
+* DONE manipulate dom all in one
+to drop the insert example org
+* DONE print 3 answers and scores
+* DONE show only first answer, collapse other
+* DONE better error handle
+uncompressing publicsuffix.txt.gz...done
+
+* DONE image inside a tag should be ignore
+* DONE include question title
+class: question-hyperlink
+* DONE packaging
+* DONE user agent
+test url
+https://www.google.com/search?q=curl%20 what ever
+
+working with user agent:
+curl -A "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0" https://www.google.com/search?q=curl
+
+without, die
+curl 'https://www.google.com/search?q=curl'
+
+when you call withou user agent google will show different pages to you, 
+the trick (dom-by-class dom "jfp3ef") will only work on this case.
+
+because of this it can figure out you're not using a browser and ban you later
+
+* DONE use curl 
+directly use of curl is hard, use request which is an abtraction over curl
+curl -A "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0" https://www.google.com
+curl -A "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0" https://www.google.com/search?q=howdoy%20you%20re%20site%3Astackoverflow.com%20OR%20site%3Astackexchange.com%20OR%20site%3Asuperuser.com%20OR%20site%3Aserverfault.com%20OR%20site%3Aaskubunu.com
+
+* DONE bug parsing
+query: elisp check if buffers are the same 
+links https://stackoverflow.com/questions/586735/how-can-i-check-if-a-current-buffer-exists-in-emacs
+
+eval triggered:
+
+catch the error: (wrong-type-argument symbolp 
+(get-buffer name)
+
+Return the buffer named name (a string).
+If there is no live buffer named name, return nil.
+name may also be a buffer; if so, the value is that buffer.
+
+(get-buffer-create name)
+
+Return the buffer named name, or create such a buffer and return it.
+A new buffer is created if there is no live buffer named name.
+If name starts with a space, the new buffer does not keep undo information.
+If name is a buffer instead of a string, then it is the value returned.
+The value is never nil.
+)
+
+probably when code sections look like lisp code
+
+#+begin_src 
+(pre nil #+begin_example  emacs 
+ ((code nil (if (buffer-exists "my-buffer-name")
+    ; do something
+ )
+)) 
+#+end_example)
+#+end_src
+
+
+#+begin_src 
+(pre nil #+begin_example  emacs 
+ (code nil (if (buffer-exists "my-buffer-name")
+    ; do something
+ )
+) #+end_example)
+#+end_src
+
+bug was due to returning double pathenthese which shr-insert-document will complain
+#+begin_example
+`(pre nil "#+begin_example " ,howdoyou--current-lang "\n" ,(nthcdr 2 it) "\n#+end_example"))
+=> (pre nil #begin... ((code nil ...)) #end..)
+
+(append `(pre nil "#+begin_example " ,howdoyou--current-lang "\n") (nthcdr 2 it) '("#+end_example")))
+=> (pre nil #begin... (code nil ...) #end..)
+#+end_example
+* DONE parse example
+https://stackoverflow.com/questions/208105/how-do-i-remove-a-property-from-a-javascript-object
+* CANCELED better guest the lang 
+<pre class="default prettyprint prettyprinted" style=""></pre>
+
+<pre class="lang-js prettyprint prettyprinted" style=""></pre>
+
+if class is lang use lang
+if default use tag 
+if none use none
+
+imposible because the class attribute is added later by js
+
+* DONE on fisrt opening, text line is not wrapped 
+maybe pop buffer first so it has a size move pop-to-buffers won't solve this but
+make the buffer wrapped not in window but a full with window (or full screen?)
+
+shawdow ~shr~ params shr-use-fonts nil so shr-internal-width will be calculated
+right on first run.
+
+#+begin_src elisp
+	(shr-internal-width (or (and shr-width
+				     (if (not shr-use-fonts)
+					 shr-width
+				       (* shr-width (frame-char-width))))
+                                ;; We need to adjust the available
+                                ;; width for when the user disables
+                                ;; the fringes, which will cause the
+                                ;; display engine usurp one column for
+                                ;; the continuation glyph.
+;;=> WE WANT THIS ROUTE
+				(if (not shr-use-fonts)
+				    (- (window-body-width) 1
+                                       (if (and (null shr-width)
+                                                (not (shr--have-one-fringe-p)))
+                                           0
+                                         1))
+				  (- (window-body-width nil t)
+                                     (* 2 (frame-char-width))
+                                     (if (and (null shr-width)
+                                              (not (shr--have-one-fringe-p)))
+                                         (* (frame-char-width) 2)
+                                       0)))))
+#+end_src
+
+* DONE how about pop window showing "getting ..." then fill it later just like what we did 
+in javascript
+
+* DONE window selection should be predictable
+- if *hdy* buffer window is currently select. Then use it 
+- it not then create new window other than the current one if there is only one window.
+
+get hdy buffer, get window having buffer, if window is seleted use it, otherwise use other window
+
+      (display-buffer howdoi-buffer '(display-buffer-use-some-window (inhibit-same-window . t))))
+* DONE links conflict with line breaks
+links in org mode are longer so shr line breaks will be not correct
+
+on shr when iterate, if see a convertable links
+give out
+#+begin_example
+[[ ttt ][index]]
+[[ ttt ][0]]
+[[ ttt ][1]]
+#+end_example
+and put the links in a index variable
+then another function will run through the buffer and do a search and replace
+it's possible but too much of work and make the code fragile
+
+how about shr width is infinitive and 
+turn on visual line mode and your buffer will be responsive, this is the right way 
+* DONE bug: catch the error: (error Memory exhausted--use C-x s then exit and restart Emacs)
+query: posgresql upsert
+https://stackoverflow.com/questions/17267417/how-to-upsert-merge-insert-on-duplicate-update-in-postgresql
+
+something with shr-insert-document
+when no bindings it works
+
+(defun howdoyou--print-node (dom)
+  (shr-insert-document dom))
+
+with shadow bindings it crashes
+
+(defun howdoyou--print-node (dom)
+  "Print the DOM."
+  ;; shawdow some `shr' parameters
+  (let ((shr-bullet "- ") ;; insead of *
+        (shr-width most-positive-fixnum) ;; no more line breaks
+        (shr-use-fonts nil)) ;; so shr-internal-width is correct on first run
+    (shr-insert-document dom)))
+
+that would be the parsing with code     
+
+no shr-insert-document crashes
+
+(shr-width most-positive-fixnum)
+
+no it's shr-use-fonts nil
+(let ((shr-bullet "- ") (shr-width most-positive-fixnum) (shr-use-fonts nil)) (shr-insert-document thanh))
+Eval error ***  Memory exhausted--use C-x s then exit and restart Emacs
+when both of them combined
+
+set shr-width to 0 or negative will disable line breaks in a sure way
+
+(defun shr-fill-lines (start end)
+  (if (<= shr-internal-width 0)
+* reponse to review
+
+#+begin_quote
+These look like false positives. You can (and should) silence the compiler so
+that the warnings don't confuse users installing the package -- one way would be
+to rewrite the function body as:
+
+  (let* ((answer-nodes (dom-by-class (cdr result) "answercell"))
+         (question-dom (car (dom-by-id (cdr result) "^question$")))
+         (title (car (dom-by-class (cdr result) "question-hyperlink")))
+         (number-of-answers (min (length answer-nodes) howdoyou-number-of-answers))
+         (tags (howdoyou--get-so-tags (cdr result)))
+         (score-nodes (dom-by-class (cdr result) "js-vote-count"))
+         acc
+         scores)
+    (dotimes (i number-of-answers)
+      (setq acc (append acc (dom-by-class (nth i answer-nodes) "post-text"))))
+    (dotimes (i (1+ number-of-answers))
+      (setq scores (append scores `(,(dom-text (nth i score-nodes))))))
+    (list (car result)
+          (dom-text title)
+          (dom-by-class question-dom "post-text")
+          acc
+          scores
+          tags)))
+
+but the function feels more complicated than it needs to be.
+#+end_quote
+This won't work
+
+#+begin_quote
+You should (require 'subr-x) for if-let (rather than rely on transitive imports). Similarly you should (require 'url-http),
+#+end_quote
+This i don't understand
+
+#+begin_quote
+And some minor stuff:
+
+    howdoyou.el#L198: Consider unless ... instead of when (not ...)
+    howdoyou.el#L21: Prefer https over http (if possible)
+    
+    accross -> across
+    Roate -> ?
+    shawdow -> shadow
+    insead -> instead
+    Othewise -> Otherwise
+#+end_quote
+thanks, corrected
+
+    #+begin_quote
+    Try to be precise with your indentation, e.g. here, since it can obfuscate
+    the scope of your expressions. (Emacs should be able to indent elisp code
+    consistently.)
+    #+end_quote
+This is wrong.
+
+* DONE render strikethrough
+* DONE hide org makers
+* DONE option to select answer buffer
+~howdoyou-switch-to-answer-buffer~
+* TODO local buffer functions
+minor-mode to manage state?
+layers/+spacemacs/spacemacs-org/local/space-doc/space-doc.el
+how spacemacs deals with readme, when the file path match the patterns
+it runs spacemacs/prettify-org-buffer at core/core-funcs.el
+
+current dead simple: use major-mode == 'org-mode as flag
+https://stackoverflow.com/questions/8008211/buffer-local-function-in-elisp
+* TODO show username
+* DONE show time
+CLOSED: [2020-08-03 Mon 12:03]
+* DONE history
+CLOSED: [2019-11-14 Thu 00:10]
+* TODO buttons to delete history item and delete all
+* TODO use ddg
+google changes too much

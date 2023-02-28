@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: gitignore
+# key: gitignore
+# --
+
+# mac
+.DS_Store
+
+# test
+coverage
+*.log
+
+# node
+node_modules
+
+# python
+__pycache__
+
+# vscode
+.vscode
+
+# Emacs
+*~
+\#*\#
+.\#*
+.ignore

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: table
+# key: table
+# --
+
+CREATE TABLE \`$0\` (
+  \`id\` varchar(36) NOT NULL,
+  \`create_at\` timestamp NULL DEFAULT NULL,
+  \`update_at\` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (\`id\`),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4

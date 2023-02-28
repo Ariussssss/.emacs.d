@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: print log
+# key: pt
+# --
+
+fmt.Printf("${1:$(yas-text)} ${1:$(mapconcat 'identity (mapcar (lambda (i) \"%s\") (split-string (yas-text) \",\")) \", \")}\n", $1)
+$0
+

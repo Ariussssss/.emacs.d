@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: tpl
+# key: tpl
+# --
+
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: $1
+# key: $2
+# --
+$0

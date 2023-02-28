@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: quote
+# key: >
+# --
+
+
+#+begin_quote
+$0
+#+end_quote

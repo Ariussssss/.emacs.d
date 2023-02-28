@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: close-tag
+# key: /
+# --
+<${1:`(yank)`} $0 />

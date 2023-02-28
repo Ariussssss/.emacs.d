@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: tag
+# key: <
+# --
+<$1 className="$2">
+  $0
+</${1:$(yas-text)}>

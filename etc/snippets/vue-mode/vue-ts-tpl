@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: vue-ts-template
+# key: vtst
+# --
+
+<template></template>
+
+<script lang="ts">
+import {
+  Component,
+  Emit,
+  Inject,
+  Model,
+  Prop,
+  Provide,
+  Vue,
+  Watch
+} from "vue-property-decorator";
+import { State, Action, Getter } from "vuex-class";
+@Component({
+  name: "`(s-replace ".vue" "" (file-name-nondirectory (buffer-file-name)))`"
+})
+export default class `(s-replace ".vue" "" (file-name-nondirectory (buffer-file-name)))` {
+  mounted() {}
+}
+</script>
+<style lang="scss" scoped></style>

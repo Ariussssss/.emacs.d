@@ -1,0 +1,39 @@
+[submodule "etc/site-vendor/elescope"]
+	path = etc/site-vendor/elescope
+	url = https://github.com/Ariussssss/elescope
+	branch = feat-support-namespace-and-navigate
+[submodule "etc/site-vendor/emacs-dashboard"]
+	path = etc/site-vendor/emacs-dashboard
+	url = https://github.com/emacs-dashboard/emacs-dashboard
+	branch = master
+[submodule "etc/site-vendor/hydra-posframe"]
+	path = etc/site-vendor/hydra-posframe
+	url = https://github.com/Ladicle/hydra-posframe
+	branch = master
+[submodule "etc/site-vendor/which-key-posframe"]
+	path = etc/site-vendor/which-key-posframe
+	url = https://github.com/yanghaoxie/which-key-posframe
+	branch = master
+[submodule "etc/site-vendor/emacs-howdoyou"]
+	path = etc/site-vendor/emacs-howdoyou
+	url = https://github.com/thanhvg/emacs-howdoyou
+	branch = master
+[submodule "etc/site-vendor/emacs-which-key"]
+	path = etc/site-vendor/emacs-which-key
+	url = https://github.com/justbur/emacs-which-key
+	branch = master
+[submodule "etc/site-vendor/awesome-tab"]
+	path = etc/site-vendor/awesome-tab
+	url = https://github.com/manateelazycat/awesome-tab
+[submodule "etc/site-vendor/lpy"]
+	path = etc/site-vendor/lpy
+	url = https://github.com/abo-abo/lpy
+[submodule "etc/site-vendor/emacs-ipython-notebook"]
+	path = etc/site-vendor/emacs-ipython-notebook
+	url = git@github.com:millejoh/emacs-ipython-notebook.git
+[submodule "etc/site-vendor/kebab"]
+	path = etc/site-vendor/kebab
+	url = git@github.com:pocket7878/kebab.git
+[submodule "etc/site-vendor/dockerfile-mode"]
+	path = etc/site-vendor/dockerfile-mode
+	url = git@github.com:spotify/dockerfile-mode.git

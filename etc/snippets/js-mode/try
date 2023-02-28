@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: try
+# key: try
+# --
+try {
+  `(yank)`
+} catch (err) {
+  console.log(err);
+}

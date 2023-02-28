@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: tpl
+# key: tpl
+# --
+
+# -*- coding: utf-8 -*-
+# @Author: Arius
+# @Email: arius@qq.com
+# @Date:   `(format-time-string "%Y-%m-%d")`$0
+
+if __name__ == "__main__":

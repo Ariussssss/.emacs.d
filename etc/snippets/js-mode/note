@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: comment for funcs
+# key: comment
+# --
+
+/**
+* ${1:Description}
+* @param ${2:ParamName} ${3:Description}
+* @param ${4:Example}
+* @return {${5:Type}}
+*/

@@ -1,0 +1,88 @@
+* Elescope
+
+[[https://melpa.org/#/elescope][file:https://melpa.org/packages/elescope-badge.svg]]
+
+[[https://github.com/freesteph/elescope/raw/master/elescope-logo.png]]
+
+** Overview
+
+[[https://github.com/freesteph/elescope/raw/master/elescope-demo.gif]]
+
+Most of programming lies in other people's code, and in
+Emacs. Elescope brings you the best of both by allowing you to quickly
+search and clone any project found on the supported forges (only
+GitHub at the moment but contributions are welcome).
+
+This package uses [[https://github.com/abo-abo/swiper][ivy]] and [[https://github.com/tkf/emacs-request][request]].
+
+** Usage
+
+*** Installation:
+
+1. Elescope is available on MELPA, otherwise copy the ~elescope.el~
+   file somewhere in your path and load it straight into your Emacs.
+2. ~customize-variable~ ~elescope-root-folder~ to tell Elescope
+   where to clone;
+3. ~elescope-checkout~.
+
+For reference, this is the entry in my init file:
+
+#+begin_src emacs-lisp
+(use-package elescope
+  :ensure t
+  :config
+  (setf elescope-root-folder "~/build/"
+        elescope-clone-depth nil
+        elescope-use-full-path t))
+#+end_src
+
+See below for a list of configuration options.
+
+** Configuration
+
+*** ~elescope-root-folder~
+
+Where to clone repos. No default set.
+
+*** ~elescope-clone-depth~
+
+How deep should the repos be cloned. Defaults to 1 so all clones are
+shallow.
+
+*** ~elescope-use-full-path~
+
+If non-nil, use the full project path including username/organisation
+to clone: cloning ~john/foo~ and ~john/bar~ results in:
+
+ #+begin_src
+└── <elescope_root_folder>
+    └── john
+        ├── bar
+        └── foo
+ #+end_src
+
+as opposed to the default, flat hierarchy:
+
+#+begin_src
+└── <elescope_root_folder>
+    ├── foo
+    └── bar
+#+end_src
+
+*** ~elescope-github-token~
+
+Token to use for identification on GitHub. This allows you to clone
+private repos you have access to.
+
+*** ~elescope-query-delay~
+
+How long to wait before considering the minibuffer input a valid
+query. This helps avoid firing a query for every single letter typed.
+Defaults to 0.7 sec and can be set to any value understood by
+`run-at-time'."
+
+** See also
+
+Previous art:
+
+- [[https://github.com/dgtized/github-clone.el][github-clone.el]].

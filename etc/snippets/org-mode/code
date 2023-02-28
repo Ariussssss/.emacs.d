@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: code
+# key: code
+# --
+
+#+begin_src $1
+$0
+#+end_src
