@@ -153,7 +153,8 @@ in the scope of that token."
       (let* ((name (if elescope-use-full-path path (cadr (split-string path "/"))))
              (destination (expand-file-name name elescope-root-folder))
              (command (format
-                       "git clone%s %s %s"
+                       "%s git clone%s %s %s"
+		       command-proxy-prefix
 		       (if elescope-clone-depth
 			   (format
 			    " --depth=%s"
@@ -168,6 +169,7 @@ in the scope of that token."
 						 (find-file destination))))
             (user-error "Something went wrong whilst cloning the project"))))))
   )
+
 
 (defun elescope--ensure-root ()
   "Stop execution if no root directory is set to clone into."

@@ -158,8 +158,11 @@
 (nyan-mode)
 
 
-(defun custom-ui ()
-  (set-frame-font "SauceCodePro Nerd Font Mono-12" nil t)
+(defun arz/custom-ui ()
+  (interactive)
+  ;; (setq default-frame-alist '((alpha-background . 50)) )
+  (set-frame-font "Comic Mono NF 10" nil t)
+  (set-face-attribute 'default nil :font "Comic Mono NF" :height 100)
   (set-face-attribute 'hl-line nil :background "VioletRed4" )
   (set-face-attribute
    'region nil
@@ -168,6 +171,7 @@
 
   (set-face-foreground 'font-lock-comment-face "plum3")
   (set-face-foreground 'org-block-begin-line "plum3")
+  (set-face-foreground 'org-code "hot pink")
   (set-face-foreground 'org-headline-done "plum3")
   (set-face-attribute 'ivy-current-match nil
 		      :foreground "white"
@@ -176,7 +180,7 @@
   (set-face-attribute
    'line-number nil
    :foreground "turquoise3"))
-(custom-ui)
+(arz/custom-ui)
 
 (defun arz/reset-theme ()
   (interactive)

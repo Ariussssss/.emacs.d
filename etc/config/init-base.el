@@ -215,7 +215,8 @@
     (ivy-posframe-mode 1)
     ))
 
-(server-force-delete)
-(server-start)
+(load "server")
+(unless (server-running-p) (server-start))
+
 (provide 'init-base)
 ;;; init-base.el ends here

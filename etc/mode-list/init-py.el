@@ -11,7 +11,7 @@
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "-i")
 
-(setq lsp-clients-python-command "/Users/arius/.pyenv/shims/pyls")
+;; (setq lsp-clients-python-command "/Users/arius/.pyenv/shims/pyls")
 (use-package blacken
   :ensure t
   :custom
@@ -24,12 +24,12 @@
 		   (defalias 'Apt 'blacken-buffer))))
   )
 
-(use-package pyenv-mode
-  :ensure t
-  :config
-  (progn
-    (pyenv-mode)
-    (pyenv-mode-set "3.8.10")))
+;; (use-package pyenv-mode
+;;   :ensure t
+;;   :config
+;;   (progn
+;;     (pyenv-mode)
+;;     (pyenv-mode-set "3.8.10")))
 
 (use-package lsp-pyright
   :ensure t

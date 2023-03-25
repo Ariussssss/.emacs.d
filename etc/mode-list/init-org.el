@@ -200,6 +200,7 @@
 
 ;; emoji
 (use-package emojify
+  :disabled t
   :ensure t
   :hook
   (org-mode . emojify-mode)

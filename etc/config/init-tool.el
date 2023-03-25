@@ -117,19 +117,12 @@
   )
 
 (use-package
-  osx-dictionary
-  :disabled
-  :ensure t
-  :bind (("C-c d" .  osx-dictionary-search-pointer))
-  )
-
-(use-package
   youdao-dictionary
   :ensure t
   :config (setq url-automatic-caching nil) 
   (which-key-add-key-based-replacements "C-x y" "有道翻译") 
   :bind (
-	 ;; ("C-x y t" . 'youdao-dictionary-search-at-point+) 
+	 ("C-x y t" . 'youdao-dictionary-search-at-point+) 
          ("C-x y p" . 'youdao-dictionary-play-voice-at-point)
 	 ("C-x y g" . 'youdao-dictionary-search-at-point-posframe) 
          ("C-x y r" . 'youdao-dictionary-search-and-replace) 
@@ -149,7 +142,7 @@
                      ))
   
   :bind (
-	 ("C-x y t" . 'fanyi-dwim2) 
+	 ;; ("C-x y t" . 'fanyi-dwim2) 
 	 )
 )
 

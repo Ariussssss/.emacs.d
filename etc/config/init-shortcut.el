@@ -68,15 +68,6 @@
       (delete-frame frame force)
     (delete-window window)))
 
-(defun open-item2 ()
-  "Open ITerm2 and naviagateTo current path."
-  (interactive)
-  (shell-command "open -a /Applications/iTerm.app/Contents/MacOS/iTerm2 .")
-  )
-
-;; Arius terminal
-;; (defalias 'Art 'open-item2)
-
 (defun open-tmux ()
   "Pass current path to tmux."
   (interactive)
@@ -101,7 +92,7 @@
 	     " -a "
 	     ))
     (message (concat "Check in " tmux-key " 🦋"))
-    (shell-command "open -a alacritty")
+    (shell-command "open -a Alacritty")
     )
   )
 
@@ -121,7 +112,7 @@
 	   (shell-command-to-string "basename $(pwd)")
 	   ))
   (message (concat "Check in " tmux-key " 🦋"))
-  (shell-command "open -a alacritty")
+  (shell-command "open -a Alacritty")
   )
 
 ;; Arius new tmux
@@ -155,20 +146,22 @@
 
 ;; 切换透明
 ;;;
-(setq arz-transparency-rate '(90 . 90))
+(setq arz-transparency-rate 70)
 (defun toggle-transparency ()
   (interactive)
-  (let ((alpha (frame-parameter nil 'alpha)))
+  (let ((alpha (frame-parameter nil 'alpha-background)))
     (set-frame-parameter
-     nil 'alpha
+     nil 'alpha-background
      (if (eql (cond ((numberp alpha) alpha)
 		    ((numberp (cdr alpha)) (cdr alpha))
 		    ;; Also handle undocumented (<active> <inactive>) form.
 		    ((numberp (cadr alpha)) (cadr alpha)))
 	      100)
-	 arz-transparency-rate '(100 . 100)))))
+	 arz-transparency-rate 100))
+    ))
 
-(set-frame-parameter nil 'alpha arz-transparency-rate)
+;; (set-frame-parameter nil 'alpha arz-transparency-rate)
+(set-frame-parameter nil 'alpha-background arz-transparency-rate)
 
 (defalias 'Aro 'toggle-transparency)
 
@@ -368,7 +361,7 @@ WIN-ID : Window index."
   ("q" nil "QUIT"))
 
 ;; (add-hook 'window-setup-hook 'toggle-frame-fullscreen t)
-(toggle-frame-fullscreen)
+;; (toggle-frame-fullscreen)
 (defun open-grimoire ()
   (interactive)
   (find-file "~/org/grimoire")
