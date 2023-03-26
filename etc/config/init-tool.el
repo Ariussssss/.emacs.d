@@ -133,11 +133,11 @@
   :custom
   (fanyi-providers '(;; 海词
                      ;; fanyi-haici-provider
-                     ;; Longman
+         	     ;; Etymonline
+                     ;; fanyi-etymon-provider
+		     ;; Longman
                      fanyi-longman-provider
-		     ;; Etymonline
-                     fanyi-etymon-provider
-                     ;; 有道同义词词典
+	                     ;; 有道同义词词典
                      ;; fanyi-youdao-thesaurus-provider
                      ))
   
@@ -280,10 +280,11 @@
   ;; Don't set `:ensure t` for built-in packages, it will mess things up when
   ;; using `package-activate-all` instead of `package-initialize`.
   ;; Don't defer this if you want it to work on the first file you opened.
+  :disabled t
   :config
   (save-place-mode 1)
   :custom
-  (save-place-file (locate-user-emacs-file ".local/places")))
+  (save-place-file (locate-user-emacs-file "~/.local/places")))
 
 (provide 'init-tool)
 ;;; init-tool.el ends here

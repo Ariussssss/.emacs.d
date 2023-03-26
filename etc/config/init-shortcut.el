@@ -96,7 +96,7 @@
     )
   )
 
-;; Arius new tmux
+;; Arius tmux
 (defalias 'Art 'open-tmux)
 
 (defun new-tmux (tmux-key)
@@ -115,7 +115,7 @@
   (shell-command "open -a Alacritty")
   )
 
-;; Arius new tmux
+;; Arius new tmux session
 (defalias 'Arnt 'new-tmux)
 
 (defun open-file ()
@@ -164,18 +164,6 @@
 (set-frame-parameter nil 'alpha-background arz-transparency-rate)
 
 (defalias 'Aro 'toggle-transparency)
-
-;; (defun ars-forward-line (line)
-;;   (interactive "nGo to next: ")
-;;   (goto-line (+ (line-number-at-pos) line))
-;;   )
-
-;; (defun ars-backward-line (line)
-;;   (interactive "nGo to before: ")
-;;   (goto-line (- (line-number-at-pos) line))
-;;   )
-;; (global-set-key (kbd "s-l") 'ars-forward-line)
-;; (global-set-key (kbd "s-L") 'ars-backward-line)
 
 (defun open-text-buffer ()
   (interactive)
@@ -227,6 +215,31 @@
 		       ))))
     ))
 
+(defun narrow-or-widen-dwim (p)
+  "Widen if buffer is narrowed, narrow-dwim otherwise.
+Dwim means: region, org-src-block, org-subtree, or
+defun, whichever applies first. Narrowing to
+org-src-block actually calls `org-edit-src-code'.
+
+With prefix P, don't widen, just narrow even if buffer
+is already narrowed."
+  (interactive "P")
+  (declare (interactive-only))
+  (cond ((and (buffer-narrowed-p) (not p)) (widen))
+        ((region-active-p)
+         (narrow-to-region (region-beginning)
+                           (region-end)))
+        ((derived-mode-p 'org-mode)
+         ;; `org-edit-src-code' is not a real narrowing
+         ;; command. Remove this first conditional if
+         ;; you don't want it.
+         (cond ((ignore-errors (org-edit-src-code) t)
+                (delete-other-windows))
+               ((ignore-errors (org-narrow-to-block) t))
+               (t (org-narrow-to-subtree))))
+        ((derived-mode-p 'latex-mode)
+         (LaTeX-narrow-to-environment))
+        (t (narrow-to-defun))))
 
 (global-set-key (kbd "M-z") 'undo-tree-undo)
 (global-set-key (kbd "M-Z") 'undo-tree-redo) 
@@ -507,7 +520,7 @@ WIN-ID : Window index."
 
 (defun arz/bookmark-set ()
   (interactive)
-  (bookmark-set (format "%s:%s" (filename) (line-number-at-pos))))
+  (bookmark-set (format "%s:%s" (buffer-file-name) (line-number-at-pos))))
 
 (defhydra arz/hydra-delete-bookmark-menu (
 					  :color magenta
@@ -566,7 +579,7 @@ WIN-ID : Window index."
 [_g_] ^open-grimoire^                    [_p_] ^find-file-in-project^      [_f_] ^counsel-rg^
 [_c_] ^set-selective-display-dlw^        [_m_] ^mark^                      [_z_] ^zoom^
 [_S_] ^source-control^                   [_d_] ^pop mark^                  [_x_] ^last mark^
-[_l_] ^open-language-menu^               [_`_] ^jump to last mark^               
+[_l_] ^open-language-menu^               [_`_] ^jump to last mark^         [_n_] ^narrow-or-widen-dwim^
 ^^1 ~ 8^^ jump mark                      [_t_] ^open-theme-menu^           [_e_] ^excute quickrun^
 [_SPC_] ^girl^
 "
@@ -601,6 +614,8 @@ WIN-ID : Window index."
   ("p" counsel-projectile-find-file nil)
   ("f" counsel-ag nil)
   ("m" arz/bookmark-set nil
+   :exit t)
+  ("n" narrow-or-widen-dwim nil
    :exit t)
   ("x" bookmark-jump-other-window nil
    :exit t)

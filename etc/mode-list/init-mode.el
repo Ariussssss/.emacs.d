@@ -15,6 +15,7 @@
 (require 'init-rust)
 (require 'init-lua)
 (require 'init-cpp)
+(require 'init-java)
 (require 'init-settings)
 (require 'init-mac)
 (require 'init-lisp)

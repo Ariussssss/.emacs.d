@@ -1,2 +1,3 @@
 #+STARTUP: content
 * My Emacs config.
+[[file:preview.png]]

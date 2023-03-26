@@ -5,6 +5,7 @@
 \#*\#
 .\#*
 .ignore
+*-compiled-snippets.el
 
 etc/config/init-private.el
 
