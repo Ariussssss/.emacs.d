@@ -134,7 +134,7 @@ POS defaults to point."
     (while custom-enabled-themes
       (disable-theme (car custom-enabled-themes)))
     (load-theme (intern local-theme) t)
-    (custom-ui)
+    (arz/custom-ui)
     (message "%s Loaded" local-theme)
     ))
 
@@ -153,7 +153,7 @@ POS defaults to point."
     (while custom-enabled-themes
       (disable-theme (car custom-enabled-themes)))
     (load-theme (intern local-theme) t)
-    (custom-ui)
+    (arz/custom-ui)
     (message "%s Loaded" local-theme)
     ))
 

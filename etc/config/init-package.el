@@ -20,8 +20,12 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+
 (unless (package-installed-p 'quelpa)
   (with-temp-buffer
+    (setq-local url-proxy-services
+      '(("http"     . "127.0.0.1:7890")
+	("https"     . "127.0.0.1:7890")))
     (url-insert-file-contents "https://raw.githubusercontent.com/quelpa/quelpa/master/quelpa.el")
     (eval-buffer)
     (quelpa-self-upgrade)

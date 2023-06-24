@@ -162,6 +162,9 @@
   (interactive)
   ;; (setq default-frame-alist '((alpha-background . 50)) )
   (set-frame-font "Comic Mono NF 10" nil t)
+  
+  (set-fontset-font t 'han (font-spec :family "142\-SS Zong Yi Ti" :size 16))
+  ;; (set-frame-font "Sauce Code Pro NF 10" nil t)
   (set-face-attribute 'default nil :font "Comic Mono NF" :height 100)
   (set-face-attribute 'hl-line nil :background "VioletRed4" )
   (set-face-attribute

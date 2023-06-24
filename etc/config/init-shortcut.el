@@ -380,6 +380,15 @@ WIN-ID : Window index."
   (find-file "~/org/grimoire")
   (find-file-in-project))
 
+(defun open-lang-store ()
+  (interactive)
+  (find-file "~/org/lang")
+  (find-file-in-project))
+
+(defun open-longman (start end)
+  (interactive "r")
+  (shell-command (format "xdg-open https://www.ldoceonline.com/dictionary/%s" (buffer-substring start end))))
+
 (defun open-github-repo ()
   (interactive)
   (shell-command "git-open"))
@@ -462,13 +471,14 @@ WIN-ID : Window index."
 					    ^Language^
 [_l_] ^toggle spellcheck^			[_s_] ^search^		[_n_] ^next^
 [_p_] ^prev^			                [_a_] ^auto correct^	[_i_] ^ispell^
-[_c_] ^code lsp^
+[_c_] ^code lsp^                            [_m_] ^store^               [_L_] ^longman^
 "
   ("l" arz/flyspell-toggle-english nil)
+  ("L" open-longman :exit t)
   ("s" ispell-word nil
    :exit t)
-  ("c" lsp nil
-   :exit t)
+  ("c" lsp nil :exit t)
+  ("m" open-lang-store nil :exit t)
   ("a" flyspell-auto-correct-word nil)
   ("p" flyspell-check-previous-highlighted-word nil)
   ("n" flyspell-goto-next-error nil)

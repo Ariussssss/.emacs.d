@@ -32,8 +32,8 @@
   :bind(
 	(
 	 ("M-s-p" . windmove-right)
-	 ("M-s-j" . windmove-up)
-	 ("M-s-k" . windmove-down)
+	 ("M-s-k" . windmove-up)
+	 ("M-s-j" . windmove-down)
 	 ("M-s-n" . windmove-left)
 	 ;; ("M-s-j" . windmove-left)
 	 ;; ("M-s-i" . windmove-up)
