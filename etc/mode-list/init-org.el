@@ -179,7 +179,7 @@
   (org-image-actual-width 300)
   (org-download-screenshot-method "/usr/local/bin/pngpaste %s")
   :bind
-  ("C-M-y" . org-download-screenshot))
+  ("C-M-y" . org-download-clipboard))
 
 ;; 自动空格
 (use-package

@@ -10,6 +10,7 @@
 
 (setq auto-save-list-file-prefix "~/.emacs.d/var/auto-save-list/.saves-")
 
+(setq dired-listing-switches "-alFhS")
 
 ;; 关闭工具栏
 (tool-bar-mode -1)
@@ -214,9 +215,6 @@
   (progn
     (ivy-posframe-mode 1)
     ))
-
-(load "server")
-(unless (server-running-p) (server-start))
 
 (provide 'init-base)
 ;;; init-base.el ends here

@@ -64,6 +64,7 @@
   :config
   (progn 
     ;; magit
+    (defalias 'Gst 'magit-status)
     ;; Arius magit blame mode))
     (defalias 'Armb 'magit-blame)
     ;; Arius magit check-out
@@ -83,6 +84,12 @@
 
 (use-package multiple-cursors
   :ensure t
+  :defer
+  :init
+  (add-hook 'multiple-cursors-mode-hook
+            (defun my/work-around-multiple-cursors-issue ()
+              (load "multiple-cursors-core.el")
+              (remove-hook 'multiple-cursors-mode-hook #'my/work-around-multiple-cursors-issue)))
   :bind (
 	 ("C->" . mc/mark-next-like-this)
 	 ("C-<" . mc/mark-previous-like-this)
@@ -119,14 +126,48 @@
 (use-package
   youdao-dictionary
   :ensure t
+  :custom
+  (youdao-dictionary-app-key "066041769a38ebb9")
+  (youdao-dictionary-secret-key "m4VKNceeMwB88NfYSRyHGYVjEieP4ou7")
   :config (setq url-automatic-caching nil) 
   (which-key-add-key-based-replacements "C-x y" "有道翻译") 
   :bind (
-	 ("C-x y t" . 'youdao-dictionary-search-at-point+) 
+	 ("C-x y t" . (lambda ()
+			(interactive)
+			(youdao-dictionary-play-voice-at-point)
+			(youdao-dictionary-search-at-point+))) 
          ("C-x y p" . 'youdao-dictionary-play-voice-at-point)
 	 ("C-x y g" . 'youdao-dictionary-search-at-point-posframe) 
          ("C-x y r" . 'youdao-dictionary-search-and-replace) 
          ("C-x y i" . 'youdao-dictionary-search-from-input)))
+
+(defun arz/youdao ()
+  (interactive)
+  (youdao-dictionary-play-voice-at-point)
+  (youdao-dictionary-search-at-point+))
+
+(use-package xclip
+  :ensure t
+  :config
+  (xclip-mode 1)
+  (custom-set-variables '(x-select-enable-clipboard t)))
+
+(use-package
+  go-translate
+  :ensure t
+  :config
+  (setq gts-default-translator (gts-translator :engines (gts-bing-engine)))
+  (setq gts-translate-list '(("en" "zh")))
+  )
+
+(defun arz/bing-translate ()
+  (interactive)
+  (gts-translate (gts-translator
+                  :picker (gts-noprompt-picker)
+                  :engines (gts-bing-engine)
+                  :render (gts-posframe-pop-render))))
+
+;; (global-set-key (kbd "C-x y") 'arz/bing-translate)
 
 (use-package fanyi
   :ensure t
@@ -137,15 +178,13 @@
                      ;; fanyi-etymon-provider
 		     ;; Longman
                      fanyi-longman-provider
-	                     ;; 有道同义词词典
+	             ;; 有道同义词词典
                      ;; fanyi-youdao-thesaurus-provider
                      ))
-  
   :bind (
 	 ;; ("C-x y t" . 'fanyi-dwim2) 
 	 )
-)
-
+  )
 ;; 更改窗格布局
 (use-package rotate
   :ensure t
@@ -285,6 +324,185 @@
   (save-place-mode 1)
   :custom
   (save-place-file (locate-user-emacs-file "~/.local/places")))
+
+;; Key	Action
+;; RET	Visit the result, file or push button at point
+;; o	Visit the result in another window
+;; n and p	Move between search hits
+;; M-n and M-p	Move between file headers
+;; The commands deadgrep-forward and deadgrep-backward are also available to move between buttons as well as search hits.
+
+;; Starting/stopping a search:
+
+;; Key	Action
+;; S	Change the search term
+;; T	Cycle through available search types: string, words, regexp
+;; C	Cycle through case sensitivity types: smart, sensitive, ignore
+;; F	Cycle through file modes: all, type, glob
+;; I	Switch to incremental search, re-running on every keystroke
+;; D	Change the search directory
+;; ^	Re-run the search in the parent directory
+;; g	Re-run the search
+;; TAB	Expand/collapse results for a file
+;; C-c C-k	Stop a running search
+;; C-u	A prefix argument prevents search commands from starting automatically.
+(use-package deadgrep
+  :ensure t
+  )
+
+(use-package ellama
+  :ensure t
+  :init
+  (setopt ellama-language "German")
+  (require 'llm-ollama)
+  (setopt ellama-provider
+	  (make-llm-ollama
+	   :chat-model "codellama:latest" :embedding-model "codellama:latest")))
+
+(use-package nov
+  :config
+  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+  (defun my-nov-font-setup ()
+    (face-remap-add-relative 'variable-pitch :family "Comic Mono NF"
+                                           :height 1.0))
+  (add-hook 'nov-mode-hook 'my-nov-font-setup)
+  )
+(use-package emms
+  :hook
+  ('emms-playlist-mode . (lambda ()
+			   (progn
+			     (local-set-key (kbd "R") 'arz/reload-emms)
+			     (local-set-key (kbd "L") 'emms-toggle-repeat-track)
+			     (local-set-key (kbd "s") 'emms-shuffle)
+			     (local-set-key (kbd "l") 'arz/emms-load-type)
+			     (local-set-key (kbd "m") 'arz/emms-change-type)
+			     (local-set-key (kbd "C-d") 'arz/emms-delete)
+			     )))
+  :config
+  (require 'emms-setup)
+  (require 'emms-player-mpv)
+  (add-to-list 'emms-player-list 'emms-player-mpv)
+  (setq emms-player-mpv-parameters 
+	'("--quiet" "--really-quiet" "--volume=40" "-af" "aecho=1.0:0.7:20:0.5"))
+  )
+
+
+(defun arz/reload-emms()
+  (interactive)
+  (progn 
+    (emms-playlist-clear)
+    (emms-add-directory-tree "~/Music/Spotify")
+    (setq emms-repeat-track nil)
+    ))
+
+
+(setq arz/music-root "~/Music/Spotify/")
+
+(defun arz/do-emms-change-type (music-type)
+  (let (
+	(target-file (alist-get 'name (emms-playlist-current-selected-track) )
+	;; (target-file "/home/arius/Music/Spotify/emo/AYER - My Hands (Truth x Lies Remix).webm")
+	)    )
+    
+    (let ( (mv-command (format "mv %s %s%s" (shell-quote-argument target-file) arz/music-root music-type)))
+      ;; (message "%s" mv-command)
+      (shell-command mv-command) 
+      ;; (emms-playlist-mode-kill-track)
+      (emms-add-file (format "%s%s/%s"
+			     arz/music-root music-type
+			     (file-name-nondirectory target-file)))
+      ;; (arz/reload-emms)
+      )
+  ) )
+
+(defun arz/emms-change-type ()
+  (interactive)
+  (let (	
+	(music-type 
+	 (ivy-read
+	  "Move to:"
+	  (split-string
+	   (s-trim
+	    (shell-command-to-string (concat
+				      "find "
+				      arz/music-root
+				      " -mindepth 1 -type d  -printf \"%f\n\""
+				      ))) "\n")))
+	)
+    (arz/do-emms-change-type music-type)
+    )
+  )
+
+(defun arz/emms-delete ()
+  (interactive)
+  (let (
+	(target-file (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
+	;; (target-file "/home/arius/Music/Spotify/emo/AYER - My Hands (Truth x Lies Remix).webm")
+	)
+    (if (y-or-n-p (format "Sure delete %s" target-file))
+	(let ( (mv-command (format "rm %s" (shell-quote-argument target-file))))
+	  ;; (message "%s" mv-command)
+	  (shell-command mv-command)
+	  (emms-playlist-mode-kill-track)
+	  (arz/emms-delete)
+	  ;; (arz/reload-emms)
+	  )
+      nil
+      )))
+
+(defun arz/do-emms-load-type (music-type)
+  (interactive)
+  (let ( (target-dir (format "%s%s" arz/music-root music-type)))
+    (emms-playlist-clear)
+    (emms-add-directory target-dir)
+    (emms-playlist-mode-play-smart)
+    (emms-shuffle) )
+  )
+
+(defun arz/emms-load-type ()
+  (interactive)
+  (let (	
+	(music-type 
+	 (ivy-read
+	  (format "Load: ")
+	  (split-string
+	   (s-trim
+	    (shell-command-to-string (concat
+				      "find "
+				      arz/music-root
+				      " -mindepth 1 -type d  -printf \"%f\n\""
+				      ))) "\n")))
+	)
+    (arz/do-emms-load-type music-type)
+    ))
+
+
+(defvar emms-player-mpv-volume 100)
+
+(defun emms-player-mpv-get-volume ()
+  "Sets `emms-player-mpv-volume' to the current volume value
+and sends a message of the current volume status."
+  (emms-player-mpv-cmd '(get_property volume)
+                       #'(lambda (vol err)
+                           (unless err
+                             (let ((vol (truncate vol)))
+                               (setq emms-player-mpv-volume vol)
+                               (message "Music volume: %s%%"
+                                        vol))))))
+
+(defun emms-player-mpv-raise-volume (&optional amount)
+  (interactive)
+  (let* ((amount (or amount 10))
+         (new-volume (+ emms-player-mpv-volume amount)))
+    (if (> new-volume 100)
+        (emms-player-mpv-cmd '(set_property volume 100))
+      (emms-player-mpv-cmd `(add volume ,amount))))
+  (emms-player-mpv-get-volume))
+
+(defun emms-player-mpv-lower-volume (&optional amount)
+  (interactive)
+  (emms-player-mpv-cmd `(add volume ,(- (or amount '10))))
+  (emms-player-mpv-get-volume))
 
 (provide 'init-tool)
 ;;; init-tool.el ends here

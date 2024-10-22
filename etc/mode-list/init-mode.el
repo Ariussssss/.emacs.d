@@ -63,7 +63,7 @@
   (lsp-ui-doc-show-with-cursor t)
   (lsp-ui-sideline-code-actions-prefix "♔")
   (lsp-ui-doc-enable t)
-  (lsp-ui-doc-delay 500)
+  (lsp-ui-doc-delay 0.5)
   :init
   (add-hook 'lsp-mode-hook 'lsp-ui-sideline-mode)
   (face-spec-set 'lsp-ui-sideline-current-symbol
@@ -115,6 +115,11 @@
 
 (use-package nim-mode
   :ensure t)
+
+(use-package markdown-mode
+  :ensure t
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown"))
 
 (provide 'init-mode)
 ;;; init-mode.el ends here

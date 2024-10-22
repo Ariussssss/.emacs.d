@@ -153,8 +153,7 @@ in the scope of that token."
       (let* ((name (if elescope-use-full-path path (cadr (split-string path "/"))))
              (destination (expand-file-name name elescope-root-folder))
              (command (format
-                       "%s git clone%s %s %s"
-		       command-proxy-prefix
+                       "proxychains git clone%s %s %s"
 		       (if elescope-clone-depth
 			   (format
 			    " --depth=%s"

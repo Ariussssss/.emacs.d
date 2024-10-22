@@ -71,6 +71,7 @@
 ;; 启动界面
 (use-package
   dashboard
+  :disabled t
   :ensure t
   :init
   (dashboard-setup-startup-hook)

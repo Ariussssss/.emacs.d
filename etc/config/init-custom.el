@@ -201,11 +201,25 @@ Version 2017-03-12"
           'face (list :background (match-string-no-properties 0)))))))
   (font-lock-flush))
 
-(quickrun-add-command "python/module"
-  '((:command . "python")
-    (:exec    . ("%c ~/lib/python-test/excute-python-module.py -- %n"))
-    (:tempfile nil))
-  :default "python")
+;; (quickrun-add-command "python/module"
+;; '((:command . "python")
+;;   (:exec    . ("%c ~/lib/python-test/excute-python-module.py -- %n"))
+;;   (:tempfile nil))
+;; :default "python")
+
+(defun arz/open-frame (name  &optional cmd)
+  (let ((f (cdr (assoc name (make-frame-names-alist)))))
+    (with-selected-frame f
+      (select-frame-set-input-focus f)
+      (eval (car (read-from-string cmd)))
+      )
+    )
+  )
+
+
+(defun arz/find-file-with-frame (name d)
+  (arz/open-frame name (format "(find-file \"%s\")" d))
+  )
 
 (provide 'init-custom)
 ;;; init-custom.el ends here

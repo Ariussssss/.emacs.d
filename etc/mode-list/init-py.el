@@ -36,7 +36,7 @@
   :hook (python-mode . (lambda ()
                          (require 'lsp-pyright)
                          (lsp-deferred)))
-  :init
+  :config
   (setq lsp-pyright-multi-root nil))
 
 (use-package lpy

@@ -167,7 +167,9 @@
 
 (defun open-text-buffer ()
   (interactive)
-  (switch-to-buffer "*scratch*"))
+  (find-file "~/org/todo.org")
+  ;; (switch-to-buffer "*scratch*")
+  )
 
 (defalias 'Atx 'open-text-buffer)
 
@@ -202,9 +204,9 @@
 
 (defun open-work-space ()
   (interactive)
-  (let ((path (ivy-read "Choose work type:" '("Code" "Packages" "Lib"))))
-    (if (string= path "Lib")
-	(find-file "~/Lib")
+  (let ((path (ivy-read "Choose work type:" '("Packages" "Music" "Spells"))))
+    (if (string= path "Spells")
+	(find-file "~/lib/spells")
       (find-file
        (concat "~/" path "/"
 	       (ivy-read "Choose work space:"
@@ -471,10 +473,9 @@ WIN-ID : Window index."
 					    ^Language^
 [_l_] ^toggle spellcheck^			[_s_] ^search^		[_n_] ^next^
 [_p_] ^prev^			                [_a_] ^auto correct^	[_i_] ^ispell^
-[_c_] ^code lsp^                            [_m_] ^store^               [_L_] ^longman^
+[_c_] ^code lsp^                            [_m_] ^store^
 "
   ("l" arz/flyspell-toggle-english nil)
-  ("L" open-longman :exit t)
   ("s" ispell-word nil
    :exit t)
   ("c" lsp nil :exit t)
@@ -591,6 +592,7 @@ WIN-ID : Window index."
 [_S_] ^source-control^                   [_d_] ^pop mark^                  [_x_] ^last mark^
 [_l_] ^open-language-menu^               [_`_] ^jump to last mark^         [_n_] ^narrow-or-widen-dwim^
 ^^1 ~ 8^^ jump mark                      [_t_] ^open-theme-menu^           [_e_] ^excute quickrun^
+[_P_] ^arz/bing-translate^               [_L_] ^lsp-workspace-manager^     [_E_] ^emms^
 [_SPC_] ^girl^
 "
   ("`" arz/jump-last-bookmark nil
@@ -614,15 +616,19 @@ WIN-ID : Window index."
   ("l" arz/hydra-language-menu/body nil)
   ("L" arz/hydra-lsp-menu/body nil)
   ("t" arz/hydra-theme-menu/body nil)
-  ("w" arz/hydra-window-menu/body nil)
+  ("W" arz/hydra-window-menu/body nil)
   ("e" quickrun nil) 
+  ("E" emms nil) 
   ("o" open-work-space nil) 
   ("s" open-init-file nil)
   ;; ("r" ranger nil)
   ("S" arz/hydra-source-menu/body nil)
   ("g" open-grimoire nil)
   ("p" counsel-projectile-find-file nil)
-  ("f" counsel-ag nil)
+  ("w" arz/youdao :exit t)
+  ("P" arz/bing-translate nil)
+  ;; ("f" counsel-ag nil)
+  ("f" deadgrep nil)
   ("m" arz/bookmark-set nil
    :exit t)
   ("n" narrow-or-widen-dwim nil

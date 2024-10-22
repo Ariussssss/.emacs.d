@@ -19,6 +19,15 @@
 	    (progn
 	      (defalias 'Apt 'clang-format))))
 
+(use-package glsl-mode
+  :ensure t)
+
+(setq auto-mode-alist 
+      (append
+       '(
+	 ("\\.\\(vs\\|fs\\|\\)\\'" . glsl-mode))
+       auto-mode-alist))
+
 (use-package clang-format+
   :ensure t
   :hook

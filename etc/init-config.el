@@ -31,5 +31,25 @@
   (dolist (elisp-code graphic-only-plugins-setting)
     (eval elisp-code)))
 
+
+(load "server")
+(unless (server-running-p) (progn
+			     (server-start)
+			     (set-frame-name "editor")
+			     (find-file "~")
+			     
+			     (with-selected-frame
+				 (clone-frame)
+			       (progn
+				 (set-frame-name "emms")
+				 ;; (emms-add-directory-tree "/home/arius/Music/Spotify")
+				 (emms-add-directory-tree "/home/arius/Music/Spotify/nihon")
+				 (emms)
+				 (emms-random)
+				 ;; (shell-command "sh /home/arius/lib/spells/load-layout.sh editor")
+				 )
+			       )
+			     ))
+
 (provide 'init-config)
 ;;; init-config.el ends here
