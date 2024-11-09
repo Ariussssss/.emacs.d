@@ -92,7 +92,7 @@
 	     " -a "
 	     ))
     (message (concat "Check in " tmux-key " 🦋"))
-    (shell-command "open -a Alacritty")
+    ;; (shell-command "open -a Alacritty")
     )
   )
 
@@ -112,7 +112,7 @@
 	   (shell-command-to-string "basename $(pwd)")
 	   ))
   (message (concat "Check in " tmux-key " 🦋"))
-  (shell-command "open -a Alacritty")
+  ;; (shell-command "open -a Alacritty")
   )
 
 ;; Arius new tmux session
@@ -167,11 +167,19 @@
 
 (defun open-text-buffer ()
   (interactive)
-  (find-file "~/org/todo.org")
+  (find-file "~/org/text.org")
   ;; (switch-to-buffer "*scratch*")
   )
 
 (defalias 'Atx 'open-text-buffer)
+
+(defun open-todo-buffer ()
+  (interactive)
+  (find-file "~/org/todo.org")
+  ;; (switch-to-buffer "*scratch*")
+  )
+
+(defalias 'Ato 'open-todo-buffer)
 
 (defalias 'Abm 'buffer-menu)
 

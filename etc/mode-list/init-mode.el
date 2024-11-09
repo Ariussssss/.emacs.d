@@ -101,7 +101,7 @@
          ("\\.vue\\'" . vue-mode))
        auto-mode-alist))
 
-(setq ispell-program-name "/usr/local/bin/aspell")
+(setq ispell-program-name "/usr/bin/aspell")
 
 (defun arz/flyspell-toggle-english ()
   (interactive)

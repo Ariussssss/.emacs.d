@@ -38,12 +38,11 @@
 (require 'quelpa-use-package)
 
 (use-package exec-path-from-shell
-  :ensure t)
-    
-;; Find Executable Path on OS X
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
-
+  :ensure t
+  :init
+  ;; Only load if on macOS or Linux
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 
 (provide 'init-package)
 

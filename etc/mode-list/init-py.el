@@ -5,11 +5,9 @@
 
 ;;; Code:
 
-(setq py-python-command "python3")
-(setq py-shell-name "python3")
-(setq python-shell-interpreter "python3")
-(setq python-shell-interpreter "ipython"
-      python-shell-interpreter-args "-i")
+(setq py-python-command "python")
+(setq py-shell-name "python")
+(setq python-shell-interpreter "python")
 
 ;; (setq lsp-clients-python-command "/Users/arius/.pyenv/shims/pyls")
 (use-package blacken
@@ -37,7 +35,9 @@
                          (require 'lsp-pyright)
                          (lsp-deferred)))
   :config
-  (setq lsp-pyright-multi-root nil))
+  (setq lsp-pyright-multi-root nil)
+  (setq lsp-pyright-python-executable-cmd (concat (string-trim (shell-command-to-string "pyenv which python"))))
+  )
 
 (use-package lpy
   :load-path"../site-vendor/lpy/lpy.el")

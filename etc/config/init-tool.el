@@ -118,8 +118,6 @@
   :config
   (progn
     (defalias 'Arc 'elescope-checkout)
-    (setq elescope-github-token nil)
-
     )
   )
 
@@ -152,13 +150,13 @@
   (xclip-mode 1)
   (custom-set-variables '(x-select-enable-clipboard t)))
 
-(use-package
-  go-translate
-  :ensure t
-  :config
-  (setq gts-default-translator (gts-translator :engines (gts-bing-engine)))
-  (setq gts-translate-list '(("en" "zh")))
-  )
+;; (use-package
+;;   go-translate
+;;   :ensure t
+;;   :config
+;;   (setq gts-default-translator (gts-translator :engines (gts-bing-engine)))
+;;   (setq gts-translate-list '(("en" "zh")))
+;;   )
 
 (defun arz/bing-translate ()
   (interactive)
@@ -360,14 +358,20 @@
 	   :chat-model "codellama:latest" :embedding-model "codellama:latest")))
 
 (use-package nov
+  :ensure t
   :config
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
   (defun my-nov-font-setup ()
     (face-remap-add-relative 'variable-pitch :family "Comic Mono NF"
-                                           :height 1.0))
+                             :height 1.0))
   (add-hook 'nov-mode-hook 'my-nov-font-setup)
   )
+
+
+
+
 (use-package emms
+  :ensure t
   :hook
   ('emms-playlist-mode . (lambda ()
 			   (progn
@@ -383,7 +387,7 @@
   (require 'emms-player-mpv)
   (add-to-list 'emms-player-list 'emms-player-mpv)
   (setq emms-player-mpv-parameters 
-	'("--quiet" "--really-quiet" "--volume=40" "-af" "aecho=1.0:0.7:20:0.5"))
+	'("--quiet" "--really-quiet" "--volume=40" "-af" "aecho=1.0:0.7:20:0.5" "--no-terminal" "--force-window"))
   )
 
 

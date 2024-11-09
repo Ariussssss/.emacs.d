@@ -4,9 +4,9 @@
 
 ;;; Code:
 
-(use-package omnisharp
-  :ensure t
-  )
+;; (use-package omnisharp
+;;   :ensure t
+;;   )
 
 
 (defun arz/find-or-show-doc ()
@@ -18,13 +18,13 @@
   )
 
 
-(use-package csharp-mode
-  :ensure t
-  :bind
-  (:map csharp-mode-map
-        ("M-." . arz/find-or-show-doc)
-	)
-  )
+;; (use-package csharp-mode
+;;   :ensure t
+;;   :bind
+;;   (:map csharp-mode-map
+;;         ("M-." . arz/find-or-show-doc)
+;; 	)
+;;   )
 
 
 (defun my-csharp-mode-setup ()
@@ -48,7 +48,7 @@
   ;; (local-set-key (kbd "C-c C-c") 'recompile)
   )
 
-(add-hook 'csharp-mode-hook 'my-csharp-mode-setup t)
+;; (add-hook 'csharp-mode-hook 'my-csharp-mode-setup t)
 
 ;; (add-hook 'after-init-hook #'unity-mode)
 
