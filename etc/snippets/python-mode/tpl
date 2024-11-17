@@ -8,5 +8,10 @@
 # @Author: Arius
 # @Email: arius@qq.com
 # @Date:   `(format-time-string "%Y-%m-%d")`$0
+import sys
 
 if __name__ == "__main__":
+    func = sys.argv[1]
+    props = ', '.join([f"'{p}'" for p in sys.argv[2:] if p])
+    cmd = f"{func}({props})"
+    eval(cmd)

@@ -212,9 +212,12 @@
 
 (defun open-work-space ()
   (interactive)
-  (let ((path (ivy-read "Choose work type:" '("Packages" "Music" "Spells"))))
-    (if (string= path "Spells")
-	(find-file "~/lib/spells")
+  (let ((path (ivy-read "Choose work type:" '("Packages" "Music" "Dotfiles"))))
+    (if (string= path "Dotfiles")
+	(progn
+	  (find-file "~/dotfiles/")
+	    (find-file-in-project)
+	    )
       (find-file
        (concat "~/" path "/"
 	       (ivy-read "Choose work space:"
@@ -222,7 +225,7 @@
 			  (shell-command-to-string
 			   (concat "cd ~/" path " && ls -d1 -- */*/"))
 			  "\n")
-		       ))))
+			 ))))
     ))
 
 (defun narrow-or-widen-dwim (p)

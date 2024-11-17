@@ -164,10 +164,11 @@
   ;; (setq default-frame-alist '((alpha-background . 50)) )
   (set-frame-font "ComicMono Nerd Font 12" nil t)
   
-  (set-fontset-font t 'han (font-spec :family "142\-SS Zong Yi Ti" :size 16))
+  ;; (set-fontset-font t 'han (font-spec :family "142\-SS Zong Yi Ti" :size 16))
+  ;; (set-fontset-font t 'han (font-spec :family "142\-SS Zong Yi Ti mhyk1gfp" :size 16))
+
   (set-fontset-font t 'hangul (font-spec :family "Noto Sans CJK KR")) ; Korean
   (set-fontset-font t 'japanese-jisx0208 (font-spec :family "Noto Sans CJK JP")) ; Japanese
-  (set-fontset-font "fontset-default" 'unicode "Symbols Nerd Font Mono-12")
 
   ;; (set-frame-font "Sauce Code Pro NF 10" nil t)
   (set-face-attribute 'default nil :font "ComicMono Nerd Font" :height 140)
