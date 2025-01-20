@@ -121,6 +121,36 @@
   :mode ("README\\.md\\'" . gfm-mode)
   :init (setq markdown-command "multimarkdown"))
 
+(use-package eglot
+  :ensure t)
+
+(use-package gdscript-mode
+  :ensure t
+  :hook (gdscript-mode . eglot-ensure)
+  :custom (gdscript-eglot-version 3))
+
+(setq gdscript-godot-executable "~/.local/bin/Redot")
+
+(defun lsp--gdscript-ignore-errors (original-function &rest args)
+  "Ignore the error message resulting from Godot not replying to the `JSONRPC' request."
+  (if (string-equal major-mode "gdscript-mode")
+      (let ((json-data (nth 0 args)))
+        (if (and (string= (gethash "jsonrpc" json-data "") "2.0")
+                 (not (gethash "id" json-data nil))
+                 (not (gethash "method" json-data nil)))
+            nil				; (message "Method not found")
+          (apply original-function args)))
+    (apply original-function args)))
+;; Runs the function `lsp--gdscript-ignore-errors` around `lsp--get-message-type` to suppress unknown notification errors.
+(advice-add #'lsp--get-message-type :around #'lsp--gdscript-ignore-errors)
+
+(quickrun-add-command "gdscript/module"
+  '((:command . "Redot")
+    (:exec    . ("%c -- %n"))
+    (:timeout . 99999)
+    (:tempfile nil))
+  :mode 'gdscript-mode)
+
 (provide 'init-mode)
 ;;; init-mode.el ends here
 
