@@ -50,7 +50,7 @@
   (:map lsp-mode-map	
 	("C-c C-f" . lsp-format-buffer)
 	("M-RET" . lsp-ui-sideline-apply-code-actions))
-  :hook ((go-mode python-mode csharp-mode) . lsp))
+  :hook ((go-mode python-mode csharp-mode gdscript-mode) . lsp))
 
 (use-package lsp-ui
   :ensure t
@@ -150,6 +150,7 @@
     (:timeout . 99999)
     (:tempfile nil))
   :mode 'gdscript-mode)
+(setq gdscript-docs-local-path "/home/arius/Packages/godotengine/godot-docs/_build/html")
 
 (provide 'init-mode)
 ;;; init-mode.el ends here

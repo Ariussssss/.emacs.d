@@ -7,8 +7,11 @@
 # Default ignore pkgs
 tools
 test
+tests
 deps
 __tests__
+doc
+*.po
 *.md
 *.json
 *.lock

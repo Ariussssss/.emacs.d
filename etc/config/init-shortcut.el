@@ -663,6 +663,11 @@ WIN-ID : Window index."
 
 (global-set-key (kbd "C-x a") #'arz/hydra-main-menu/body)
 
+(defun now ()
+  "Insert string for the current time formatted like '2:34 PM'."
+  (interactive)                 ; permit invocation in minibuffer
+  (insert (format-time-string "%I%M")))
+
 (provide 'init-shortcut)
 ;;; init-shortcut.el ends here
 
