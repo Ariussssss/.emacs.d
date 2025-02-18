@@ -21,23 +21,23 @@
   (package-install 'use-package))
 
 
-(unless (package-installed-p 'quelpa)
-  (with-temp-buffer
-    (setq-local url-proxy-services
-      '(("http"     . "127.0.0.1:7890")
-	("https"     . "127.0.0.1:7890")))
-    (url-insert-file-contents "https://raw.githubusercontent.com/quelpa/quelpa/master/quelpa.el")
-    (eval-buffer)
-    (quelpa-self-upgrade)
-    (quelpa
-     '(quelpa-use-package
-       :fetcher git
-       :url "https://github.com/quelpa/quelpa-use-package.git"))
-    ))
+;; (unless (package-installed-p 'quelpa)
+;;   (with-temp-buffer
+;;     (setq-local url-proxy-services
+;;       '(("http"     . "127.0.0.1:7890")
+;; 	("https"     . "127.0.0.1:7890")))
+;;     (url-insert-file-contents "https://raw.githubusercontent.com/quelpa/quelpa/master/quelpa.el")
+;;     (eval-buffer)
+;;     (quelpa-self-upgrade)
+;;     (quelpa
+;;      '(quelpa-use-package
+;;        :fetcher git
+;;        :url "https://github.com/quelpa/quelpa-use-package.git"))
+;;     ))
 
-(require 'quelpa-use-package)
+;; (require 'quelpa-use-package)
 
-(use-package exec-path-from-shell
+:::(use-package exec-path-from-shell
   :ensure t
   :config
   (exec-path-from-shell-initialize)

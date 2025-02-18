@@ -28,13 +28,13 @@
 	 ("\\.\\(vs\\|fs\\|\\)\\'" . glsl-mode))
        auto-mode-alist))
 
-(use-package clang-format+
-  :ensure t
-  :hook
-  (c-mode-common-hook . clang-format+-mode)
-  :quelpa (clang-format+
-           :fetcher github
-           :repo "SavchenkoValeriy/emacs-clang-format-plus"))
+;; (use-package clang-format+
+;;   :ensure t
+;;   :hook
+;;   (c-mode-common-hook . clang-format+-mode)
+;;   :quelpa (clang-format+
+;;            :fetcher github
+;;            :repo "SavchenkoValeriy/emacs-clang-format-plus"))
 
 (provide 'init-cpp)
 ;;; init-cpp.el ends here

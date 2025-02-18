@@ -43,7 +43,7 @@
 			       (progn
 				 (set-frame-name "emms")
 				 ;; (emms-add-directory-tree "/home/arius/Music/Spotify")
-				 (emms-add-directory-tree "/home/arius/Music/Spotify/nihon")
+				 (emms-add-directory-tree "/home/arius/Music/Spotify/loop")
 				 (emms)
 				 (emms-random)
 				 ;; (shell-command "sh /home/arius/lib/spells/load-layout.sh editor")
