@@ -10,8 +10,14 @@
 # @Date:   `(format-time-string "%Y-%m-%d")`$0
 import sys
 
+def main():
+    pass
+
 if __name__ == "__main__":
-    func = sys.argv[1]
-    props = ', '.join([f"'{p}'" for p in sys.argv[2:] if p])
-    cmd = f"{func}({props})"
-    eval(cmd)
+    if len(sys.argv) > 1:
+        func = sys.argv[1]
+        props = ', '.join([f"'{p}'" for p in sys.argv[2:] if p])
+        cmd = f"{func}({props})"
+        eval(cmd)
+    else:
+        main()

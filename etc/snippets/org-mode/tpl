@@ -4,7 +4,7 @@
 # name: tpl
 # --
 
-#+STARTUP: all
+#+STARTUP: overview
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: `(s-replace ".org" "" (file-name-nondirectory (buffer-file-name)))`
 #+DATE: [`(format-time-string  "%F %R" (current-time))`]

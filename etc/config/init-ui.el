@@ -162,7 +162,7 @@
 (defun arz/custom-ui ()
   (interactive)
   ;; (setq default-frame-alist '((alpha-background . 50)) )
-  (set-frame-font "ComicMono Nerd Font 12" nil t)
+  (set-frame-font "ComicMono Nerd Font 18" nil t)
   
   (set-fontset-font t 'hangul (font-spec :family "Noto Sans CJK KR")) ; Korean
   (set-fontset-font t 'japanese-jisx0208 (font-spec :family "Noto Sans CJK JP")) ; Japanese
@@ -170,7 +170,7 @@
   ;; (set-frame-font "Sauce Code Pro NF 10" nil t)
   (set-fontset-font t 'unicode "all-the-icons" nil)
   ;; (set-face-attribute 'default nil :font "ComicMono Nerd Font" :height 140)
-  (set-fontset-font t 'han (font-spec :family "142\-SS Zong Yi Ti" :size 16))
+  (set-fontset-font t 'han (font-spec :family "142\-SS Zong Yi Ti" :size 24))
   ;; (set-fontset-font t 'han (font-spec :family "142\-SS Zong Yi Ti mhyk1gfp" :size 16))
 
   ;; (set-face-attribute 'hl-line nil :background "VioletRed4" )

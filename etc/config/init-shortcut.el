@@ -167,15 +167,14 @@
 
 (defun open-text-buffer ()
   (interactive)
-  (find-file "~/org/text.org")
-  ;; (switch-to-buffer "*scratch*")
+  (find-file "~/org/grimoire/private/draft.org")
   )
 
 (defalias 'Atx 'open-text-buffer)
 
 (defun open-todo-buffer ()
   (interactive)
-  (find-file "~/org/todo.org")
+  (find-file "~/org/grimoire/private/todo.org")
   ;; (switch-to-buffer "*scratch*")
   )
 
@@ -212,20 +211,31 @@
 
 (defun open-work-space ()
   (interactive)
-  (let ((path (ivy-read "Choose work type:" '("Packages" "Music" "Dotfiles"))))
+  (let ((path (ivy-read "Choose work type:" '("Packages" "Dotfiles" "Lib" "Music"))))
     (if (string= path "Dotfiles")
 	(progn
 	  (find-file "~/dotfiles/")
+	  (find-file-in-project)
+	  )
+      (if (string= path "Lib")
+	  (progn
+	    (find-file "~/lib/draft/scripts/")
 	    (find-file-in-project)
 	    )
-      (find-file
-       (concat "~/" path "/"
-	       (ivy-read "Choose work space:"
-			 (split-string
-			  (shell-command-to-string
-			   (concat "cd ~/" path " && ls -d1 -- */*/"))
-			  "\n")
-			 ))))
+	(progn
+	  (find-file
+	   (concat "~/" path "/"
+		   (ivy-read "Choose work space:"
+			     (split-string
+			      (shell-command-to-string
+			       (concat "cd ~/" path " && ls -d1 -- */*/"))
+			      "\n")
+			     )))
+	  (find-file-in-project)
+
+	  )
+	
+	))
     ))
 
 (defun narrow-or-widen-dwim (p)
@@ -586,6 +596,21 @@ WIN-ID : Window index."
                                                                                       (random (length girl-say-lst))
                                                                                       girl-say-lst))))))
 
+(defun arz/tv ()
+  "Load video list from a text file and play in the listed order."
+    (interactive)
+    (let ((video-directory "/home/arius/lib/output/tv/") ; 视频文件所在目录
+          (video-list (with-temp-buffer
+			(insert-file-contents "/home/arius/lib/output/tv/emms_playlist")
+			(split-string (buffer-string) "\n" t))))
+      (emms-playlist-clear)
+      (emms-playlist-new)
+      (dolist (video video-list)
+	(let ((video-path (expand-file-name video video-directory)))
+          (when (file-exists-p video-path)
+            (emms-add-file video-path))))
+      (goto-char (point-min))
+      (emms-playlist-mode-play-smart)))
 
 ;; Main menu
 (defhydra arz/hydra-main-menu (

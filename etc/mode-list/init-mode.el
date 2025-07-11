@@ -55,7 +55,7 @@
 (use-package lsp-ui
   :ensure t
   :custom
-  (lsp-ui-sideline-enable t)
+  (lsp-ui-sideline-enable nil)
   (lsp-ui-sideline-show-symbl t)
   (lsp-ui-sideline-show-hover t)
   (lsp-ui-sideline-show-diagnostics nil)
@@ -65,18 +65,20 @@
   (lsp-ui-doc-enable t)
   (lsp-ui-doc-delay 0.5)
   :init
-  (add-hook 'lsp-mode-hook 'lsp-ui-sideline-mode)
+  ;; (add-hook 'lsp-mode-hook 'lsp-ui-sideline-mode)
   (face-spec-set 'lsp-ui-sideline-current-symbol
 		 '((t
 		    :background "black"
 		    :foreground "magenta"
 		    :weight ultra-bold
-		    :box (:line-width -1 :color "black")
-		    :height 0.99)))
+		    :box t
+		    :height 1)))
   (face-spec-set 'lsp-ui-sideline-symbol
-		 '((t :foreground "deep pink")))
+		 '((t :foreground "deep pink"
+ 		      )))
   (face-spec-set 'lsp-ui-sideline-symbol-info
 		 '((t :foreground "yellow")))
+  (setq lsp-ui-doc-position 'at-point)
   )
 
 (use-package format-all

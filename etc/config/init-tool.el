@@ -386,8 +386,9 @@
   (require 'emms-setup)
   (require 'emms-player-mpv)
   (add-to-list 'emms-player-list 'emms-player-mpv)
+  (setq emms-repeat-playlist t)
   (setq emms-player-mpv-parameters 
-	'("--quiet" "--really-quiet" "--volume=40" "-af" "aecho=1.0:0.7:20:0.5" "--no-terminal" "--force-window"))
+	'("--quiet" "--really-quiet" "--volume=75" "-af" "aecho=1.0:0.7:20:0.5" "--no-terminal" "--force-window"))
   )
 
 

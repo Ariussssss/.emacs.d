@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# contributor : Arius <ariussssss37@gmail.com>
+# name: title
+# key: t
+# --
+
+* $1
+:PROPERTIES:
+:VISIBILITY: showall
+:END:
+$0

@@ -37,8 +37,31 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ignored-local-variable-values '((encoding . utf-8)))
+ '(lsp-ui-sideline-enable nil)
  '(package-selected-packages
-   '(gdscript-mode pyenv-mode nov zoom-window zig-mode youdao-dictionary yaml-mode xclip which-key web-mode vue-mode vimrc-mode undo-tree typescript-mode tide thrift sudo-edit smartparens simple-httpd rustic rotate ron-mode rjsx-mode request rainbow-delimiters quickrun quelpa-use-package prettier-js pangu-spacing page-break-lines ox-gfm origami org-download org-bullets omnisharp nyan-mode nim-mode multiple-cursors move-text major-mode-hydra magit lua-mode lsp-ui lsp-pyright lispy kotlin-mode keyfreq ivy-posframe indent-guide groovy-mode go-translate go-mode gnuplot glsl-mode git-gutter format-all find-file-in-project fanyi exec-path-from-shell emms ellama doom-themes doom-modeline deadgrep counsel-projectile company-auctex clang-format+ cdlatex ccls blacken bazel anzu all-the-icons-ivy-rich all-the-icons-ivy all-the-icons-dired))
+   '(all-the-icons-dired all-the-icons-ivy all-the-icons-ivy-rich anzu
+			 bazel blacken ccls cdlatex clang-format+
+			 company-auctex counsel-projectile deadgrep
+			 doom-modeline doom-themes ellama emms
+			 exec-path-from-shell fanyi
+			 find-file-in-project format-all gdscript-mode
+			 git-gutter glsl-mode gnuplot go-mode
+			 go-translate groovy-mode helm-posframe
+			 indent-guide ivy-posframe keyfreq kotlin-mode
+			 lispy log4j-mode lsp-pyright lsp-ui lua-mode
+			 magit major-mode-hydra move-text
+			 multiple-cursors nim-mode nov nyan-mode
+			 omnisharp org-bullets org-download origami
+			 ox-gfm page-break-lines pangu-spacing
+			 prettier-js py-isort pyenv-mode
+			 quelpa-use-package quickrun
+			 rainbow-delimiters request rjsx-mode ron-mode
+			 rotate rustic simple-httpd smartparens
+			 stylus-mode sudo-edit sws-mode thrift tide
+			 typescript-mode undo-tree vimrc-mode vue-mode
+			 web-mode which-key wl-clipboard-x xclip
+			 yaml-mode youdao-dictionary zig-mode
+			 zoom-window))
  '(select-enable-clipboard t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

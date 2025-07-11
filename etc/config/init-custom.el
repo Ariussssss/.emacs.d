@@ -201,11 +201,20 @@ Version 2017-03-12"
           'face (list :background (match-string-no-properties 0)))))))
   (font-lock-flush))
 
-;; (quickrun-add-command "python/module"
-;; '((:command . "python")
-;;   (:exec    . ("%c ~/lib/python-test/excute-python-module.py -- %n"))
-;;   (:tempfile nil))
-;; :default "python")
+(quickrun-add-command "python/module"
+'((:command . "python")
+  (:exec    . ("%c ~/.emacs.d/etc/config/quickrun-python.py %n"))
+  (:tempfile nil))
+:default "python")
+
+(quickrun-add-command "c++/c1z"
+'((:command . "python")
+  (:exec    . ("%c ~/.emacs.d/etc/config/quickrun-opengl.py %s"))
+  (:tempfile . nil)
+  (:timeout . 60)
+  )
+:default "c++")
+
 
 (defun arz/open-frame (name  &optional cmd)
   (let ((f (cdr (assoc name (make-frame-names-alist)))))
